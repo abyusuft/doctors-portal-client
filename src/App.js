@@ -3,6 +3,7 @@ import './App.css';
 import About from './components/Pages/About/About';
 import Appointment from './components/Pages/Appointment/Appointment';
 import Contact from './components/Pages/Contact/Contact';
+import Footer from './components/Pages/Footer/Footer';
 import Header from './components/Pages/Header/Header';
 import Home from './components/Pages/Home/Home';
 import Login from './components/Pages/Login/Login';
@@ -21,6 +22,8 @@ function App() {
         <Route path='/contact' element={<Contact></Contact>}></Route>
         <Route path='/about' element={<About></About>}></Route>
       </Routes>
+
+      <Footer></Footer>
     </div>
   );
 }
