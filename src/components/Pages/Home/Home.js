@@ -1,9 +1,9 @@
 import React from 'react';
-import Appointment from './Appointment';
 import Banner from './Banner';
 import Exceptional from './Exceptional';
 import Info from './Info';
 import OurService from './OurService';
+import MakeAppointment from './MakeAppointment'
 
 const Home = () => {
 
@@ -13,7 +13,7 @@ const Home = () => {
             <Info></Info>
             <OurService></OurService>
             <Exceptional></Exceptional>
-            <Appointment></Appointment>
+            <MakeAppointment></MakeAppointment>
         </div>
     );
 };

@@ -1,3 +1,4 @@
+
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import About from './components/Pages/About/About';
@@ -11,7 +12,7 @@ import Reviews from './components/Pages/Reviews/Reviews';
 
 function App() {
   return (
-    <div >
+    <div className='max-w-7xl mx-auto px-12'>
       <Header></Header>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
