@@ -23,7 +23,7 @@ const AppointmentBanner = ({ date, setDate }) => {
                         captionLayout="dropdown"
                         dateFormat="DD-MM-YYYY"
                         mode="single"
-                        selected={date}
+                        selected={(date, null)}
                         onSelect={parseISO(setDate)}
                     />
 
