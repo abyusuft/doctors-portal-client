@@ -1,20 +1,29 @@
 import React from 'react';
 import auth from '../../../firebase.init';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-
+    const [sendPasswordResetEmail, sending, rError] = useSendPasswordResetEmail(auth);
+    const [signInWithEmailAndPassword, lUser, lLoading, lError,] = useSignInWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
 
 
+    if (loading || lLoading) {
+        return <button class="btn btn-square loading"></button>;
+    }
     if (user) {
         console.log(user);
     }
-    const onSubmit = data => {
-
+    const onSubmit = (data, e) => {
+        e.preventDefault();
         console.log(data)
+        signInWithEmailAndPassword(data.email, data.password);
+
+
+        e.value.reset();
     };
 
 
@@ -77,9 +86,10 @@ const Login = () => {
                                 <span className="label-text-alt text-red-500">{errors.password?.type === 'minLength' && `${errors?.password?.message}`}</span>
                             </label>
                         </div>
-
                         <input type="submit" className='btn btn-primary text-white w-full max-w-xs' value='Login' />
                     </form>
+                    <p className='mt-4'>New to Doctors Portal? <Link to='/signup' className='text-primary font-bold'>SignUp</Link></p>
+                    <p className='mt-1'>Forgot Your Password? <span onClick={() => sendPasswordResetEmail(console.log('Delete Console and replace with variable'))} style={{ cursor: "pointer" }} className='pointer text-primary font-bold'>Reset</span></p>
                 </div>
 
 
