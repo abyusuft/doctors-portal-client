@@ -8,7 +8,7 @@ const Login = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
     const [sendPasswordResetEmail, sending, rError] = useSendPasswordResetEmail(auth);
     const [signInWithEmailAndPassword, lUser, lLoading, lError,] = useSignInWithEmailAndPassword(auth);
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
 
     if (loading || lLoading) {
@@ -17,13 +17,14 @@ const Login = () => {
     if (user) {
         console.log(user);
     }
+    if (error || rError) {
+        console.log(error, rError)
+    }
     const onSubmit = (data, e) => {
-        e.preventDefault();
-        console.log(data)
         signInWithEmailAndPassword(data.email, data.password);
+        reset();
 
 
-        e.value.reset();
     };
 
 
@@ -88,6 +89,7 @@ const Login = () => {
                         </div>
                         <input type="submit" className='btn btn-primary text-white w-full max-w-xs' value='Login' />
                     </form>
+                    <p>{error || rError}</p>
                     <p className='mt-4'>New to Doctors Portal? <Link to='/signup' className='text-primary font-bold'>SignUp</Link></p>
                     <p className='mt-1'>Forgot Your Password? <span onClick={() => sendPasswordResetEmail(console.log('Delete Console and replace with variable'))} style={{ cursor: "pointer" }} className='pointer text-primary font-bold'>Reset</span></p>
                 </div>

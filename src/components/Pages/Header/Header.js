@@ -1,14 +1,24 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../../firebase.init';
 
 const Header = () => {
+
+    const [user, loading, error] = useAuthState(auth);
+
+    const handleSignout = () => {
+        signOut(auth);
+        console.log('signout Successfull')
+    }
     const menuItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/appointment'>Appointment</Link></li>
         <li><Link to='/reviews'>Reviews</Link></li>
         <li><Link to='/contact'>Contact Us</Link></li>
         <li><Link to='/about'>About</Link></li>
-        <li><Link to='/login' className='btn btn-primary text-white'>Login</Link></li>
+        {user ? <li><span className='btn btn-primary text-white' onClick={handleSignout}>Sign Out</span></li> : <li><Link to='/login' className='btn btn-primary text-white'>Login</Link></li>}
     </>
     return (
         <div className='container mx-auto'>
