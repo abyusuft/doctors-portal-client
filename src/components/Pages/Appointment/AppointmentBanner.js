@@ -1,5 +1,4 @@
 import charir from '../../../assets/images/chair.png'
-import { parseISO } from 'date-fns'
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import bg from '../../../assets/images/bg.png'
@@ -24,7 +23,7 @@ const AppointmentBanner = ({ date, setDate }) => {
                         dateFormat="DD-MM-YYYY"
                         mode="single"
                         selected={(date, null)}
-                        onSelect={parseISO(setDate)}
+                        onSelect={setDate}
                     />
 
                 </div>
