@@ -12,6 +12,9 @@ import SignUp from './components/Pages/Login/SignUp';
 import Reviews from './components/Pages/Reviews/Reviews';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Dashboard from './components/Pages/Dashboard/Dashboard';
+import MyAppoientment from './components/Pages/Dashboard/MyAppoientment';
+import MyReview from './components/Pages/Dashboard/MyReview';
 
 function App() {
   return (
@@ -26,6 +29,11 @@ function App() {
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
         <Route path='/contact' element={<Contact></Contact>}></Route>
         <Route path='/about' element={<About></About>}></Route>
+        <Route path='/dashboard' element={<Dashboard></Dashboard>}>
+          <Route index element={<MyAppoientment></MyAppoientment>}></Route>
+          <Route path='myreview' element={<MyReview></MyReview>}></Route>
+
+        </Route>
       </Routes>
 
       <Footer></Footer>

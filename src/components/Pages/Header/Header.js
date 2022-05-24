@@ -6,7 +6,7 @@ import auth from '../../../firebase.init';
 
 const Header = () => {
 
-    const [user, loading, error] = useAuthState(auth);
+    const [user] = useAuthState(auth);
 
     const handleSignout = () => {
         signOut(auth);
@@ -16,8 +16,11 @@ const Header = () => {
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/appointment'>Appointment</Link></li>
         <li><Link to='/reviews'>Reviews</Link></li>
-        <li><Link to='/contact'>Contact Us</Link></li>
+        <li><Link to='/contact'>Contact</Link></li>
         <li><Link to='/about'>About</Link></li>
+        {
+            user && <li><Link to='/dashboard'>Dashboard</Link></li>
+        }
         {user ? <li><span className='btn btn-primary text-white' onClick={handleSignout}>Sign Out</span></li> : <li><Link to='/login' className='btn btn-primary text-white'>Login</Link></li>}
     </>
     return (
@@ -32,13 +35,16 @@ const Header = () => {
                             {menuItems}
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost uppercase font-bold text-2xl">Doctors Portal</Link>
+                    <Link to='/' className="btn btn-ghost uppercase font-bold text-xl">Doctors Portal</Link>
                 </div>
                 <div className="navbar-end hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
                         {menuItems}
 
                     </ul>
+                </div>
+                <div className="navbar-end">
+                    <label htmlFor="my-drawer-2" className="btn btn-primary text-white drawer-button lg:hidden">Dashboard</label>
                 </div>
             </div>
         </div>
