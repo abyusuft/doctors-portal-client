@@ -2,20 +2,22 @@ import React from 'react';
 import auth from '../../../firebase.init';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useToken from '../../../hooks/useToken';
 
 const Login = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
     const [sendPasswordResetEmail, sending, rError] = useSendPasswordResetEmail(auth);
     const [signInWithEmailAndPassword, lUser, lLoading, lError,] = useSignInWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-
+    const [token] = useToken(user || lUser)
+    const navigate = useNavigate();
 
     if (loading || lLoading) {
         return <button class="btn btn-square loading"></button>;
     }
-    if (user) {
-        console.log(user);
+    if (user || lUser) {
+        navigate('/')
     }
     if (error || rError) {
         console.log(error, rError)

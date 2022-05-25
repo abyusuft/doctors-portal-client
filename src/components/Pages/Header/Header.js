@@ -10,7 +10,7 @@ const Header = () => {
 
     const handleSignout = () => {
         signOut(auth);
-        console.log('signout Successfull')
+        localStorage.removeItem('accessToken')
     }
     const menuItems = <>
         <li><Link to='/'>Home</Link></li>

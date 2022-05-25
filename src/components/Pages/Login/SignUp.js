@@ -3,11 +3,13 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-fi
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import useToken from '../../../hooks/useToken';
 
 const SignUp = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
     const [createUserWithEmailAndPassword, eUser, eLoading, eError,] = useCreateUserWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [token] = useToken(user || eUser);
 
 
     if (loading || eLoading) {
